@@ -176,7 +176,7 @@ export default function CustomTabBar({ state, navigation }: BottomTabBarProps) {
           styles.bubble,
           {
             bottom: insets.bottom + BAR_HEIGHT - BUBBLE / 2 - 15,
-            backgroundColor: colors.background,
+            backgroundColor: colors.tab,
           },
           bubbleStyle,
         ]}
