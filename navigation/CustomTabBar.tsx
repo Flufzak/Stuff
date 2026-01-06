@@ -24,15 +24,11 @@ const ICON_SIZE = 22;
 const H_PADDING = 28;
 
 // Notch groter dan bubble (zoals screenshot)
-const NOTCH_RADIUS = (BUBBLE + 32) / 2;
+const NOTCH_RADIUS = (BUBBLE + 25) / 2;
 
 const AnimatedPath = Animated.createAnimatedComponent(Path);
 
-export default function CustomTabBar({
-  state,
-  descriptors,
-  navigation,
-}: BottomTabBarProps) {
+export default function CustomTabBar({ state, navigation }: BottomTabBarProps) {
   const insets = useSafeAreaInsets();
   const screenWidth = Dimensions.get("window").width;
 
@@ -87,7 +83,7 @@ export default function CustomTabBar({
 
     // notch grootte/shape
     const R = NOTCH_RADIUS; // half breedte van notch
-    const D = 46; // diepte van de U
+    const D = 40; // diepte van de U
 
     // clamp zodat notch niet buiten scherm gaat
     const clampedCx = Math.max(R + 12, Math.min(W - R - 12, cx));
