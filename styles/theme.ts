@@ -15,6 +15,7 @@ export const selectColors = createSelector(
       text: isDark ? "#FFFFFF" : "#3f3f3fff",
       border: isDark ? "#2A2A2A" : "#FFFFFF",
       card: isDark ? "#3f3f3fff" : "#FFFFFF",
+      tab: isDark ? "#363636ff" : "#FFFFFF",
     };
   }
 );

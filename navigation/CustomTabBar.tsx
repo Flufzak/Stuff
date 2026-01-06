@@ -17,6 +17,8 @@ import Animated, {
   useAnimatedProps,
 } from "react-native-reanimated";
 import { palette } from "../styles/palette";
+import { useAppSelector } from "../store/hooks";
+import { selectColors } from "../styles/theme";
 
 const BAR_HEIGHT = 56;
 const BUBBLE = 44;
@@ -29,6 +31,7 @@ const NOTCH_DEPTH = 46;
 const AnimatedPath = Animated.createAnimatedComponent(Path);
 
 export default function CustomTabBar({ state, navigation }: BottomTabBarProps) {
+  const colors = useAppSelector(selectColors);
   const insets = useSafeAreaInsets();
   const screenWidth = Dimensions.get("window").width;
 
@@ -113,7 +116,7 @@ export default function CustomTabBar({ state, navigation }: BottomTabBarProps) {
         <Svg width={screenWidth} height={BAR_HEIGHT}>
           <AnimatedPath
             animatedProps={animatedPathProps}
-            fill="#fff"
+            fill={colors.tab}
             fillRule="evenodd"
             clipRule="evenodd"
           />
@@ -173,15 +176,16 @@ export default function CustomTabBar({ state, navigation }: BottomTabBarProps) {
           styles.bubble,
           {
             bottom: insets.bottom + BAR_HEIGHT - BUBBLE / 2 - 15,
+            backgroundColor: colors.background,
           },
           bubbleStyle,
         ]}
       >
-        <Ionicons name={activeIcon} size={ICON_SIZE} color={palette.pink} />
+        <Ionicons name={activeIcon} size={ICON_SIZE} color={colors.primary} />
       </Animated.View>
 
       {/* ANDROID SAFE AREA */}
-      <View style={{ height: insets.bottom, backgroundColor: "#fff" }} />
+      <View style={{ height: insets.bottom, backgroundColor: colors.tab }} />
     </View>
   );
 }
@@ -213,7 +217,6 @@ const styles = StyleSheet.create({
     width: BUBBLE,
     height: BUBBLE,
     borderRadius: BUBBLE / 2,
-    backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
   },
