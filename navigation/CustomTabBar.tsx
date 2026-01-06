@@ -16,7 +16,6 @@ import Animated, {
   withTiming,
   useAnimatedProps,
 } from "react-native-reanimated";
-import { palette } from "../styles/palette";
 import { useAppSelector } from "../store/hooks";
 import { selectColors } from "../styles/theme";
 
@@ -26,7 +25,7 @@ const ICON_SIZE = 22;
 const H_PADDING = 28;
 
 const NOTCH_RADIUS = (BUBBLE + 56) / 2;
-const NOTCH_DEPTH = 46;
+const NOTCH_DEPTH = 42;
 
 const AnimatedPath = Animated.createAnimatedComponent(Path);
 
