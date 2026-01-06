@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useRef } from "react";
 import { Pressable, StyleSheet, View, Animated, Easing } from "react-native";
 
 type ThemeSwitchProps = {
-  value: boolean; // true = light, false = dark (of omgekeerd, kies jij)
+  value: boolean;
   onChange: (next: boolean) => void;
   disabled?: boolean;
 };
