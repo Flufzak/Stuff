@@ -1,15 +1,9 @@
 import React, { useEffect, useMemo } from "react";
-import {
-  View,
-  Pressable,
-  StyleSheet,
-  Dimensions,
-  Platform,
-} from "react-native";
+import { View, Pressable, StyleSheet, Dimensions } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import type { BottomTabBarProps } from "@react-navigation/bottom-tabs";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import Svg, { Path } from "react-native-svg";
+import Svg, { Path, Line } from "react-native-svg";
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -107,6 +101,33 @@ export default function CustomTabBar({ state, navigation }: BottomTabBarProps) {
 
     return { d: `${outer} ${notch}` };
   });
+  const animatedTopStrokeProps = useAnimatedProps(() => {
+    const W = screenWidth;
+
+    const cx = bubbleX.value + BUBBLE / 2;
+
+    const R = NOTCH_RADIUS;
+    const D = NOTCH_DEPTH;
+    const LIP = 12;
+
+    const clampedCx = Math.max(R + LIP + 12, Math.min(W - R - LIP - 12, cx));
+
+    const x1 = clampedCx - R;
+    const x2 = clampedCx + R;
+
+    // Alleen de bovenrand met notch, geen rectangle
+    const topStroke = [
+      `M 0 0`,
+      `H ${x1 - LIP}`,
+      `L ${x1} 0`,
+      `C ${x1 + R * 0.35} 0, ${clampedCx - R * 0.65} ${D}, ${clampedCx} ${D}`,
+      `C ${clampedCx + R * 0.65} ${D}, ${x2 - R * 0.35} 0, ${x2} 0`,
+      `L ${x2 + LIP} 0`,
+      `H ${W}`,
+    ].join(" ");
+
+    return { d: topStroke };
+  });
 
   return (
     <View style={styles.wrapper} pointerEvents="box-none">
@@ -118,6 +139,16 @@ export default function CustomTabBar({ state, navigation }: BottomTabBarProps) {
             fill={colors.tab}
             fillRule="evenodd"
             clipRule="evenodd"
+          />
+          {/* Stroke die de curve volgt */}
+          <AnimatedPath
+            animatedProps={animatedTopStrokeProps}
+            fill="none"
+            stroke={colors.border}
+            strokeWidth={1}
+            strokeLinejoin="round"
+            strokeLinecap="round"
+            opacity={0.6}
           />
         </Svg>
 
@@ -218,5 +249,16 @@ const styles = StyleSheet.create({
     borderRadius: BUBBLE / 2,
     alignItems: "center",
     justifyContent: "center",
+    borderWidth: 1,
+    borderColor: "rgba(0,0,0,0.08)",
+
+    // shadow iOS
+    shadowColor: "#000",
+    shadowOpacity: 0.18,
+    shadowRadius: 8,
+    shadowOffset: { width: 0, height: 4 },
+
+    //  Android
+    elevation: 8,
   },
 });

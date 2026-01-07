@@ -13,7 +13,7 @@ export const selectColors = createSelector(
 
       background: isDark ? "#3f3f3fff" : "#f5f5f5ff",
       text: isDark ? "#FFFFFF" : "#3f3f3fff",
-      border: isDark ? "#2A2A2A" : "#FFFFFF",
+      border: isDark ? "#2A2A2A" : "#d6d5d5ff",
       card: isDark ? "#3f3f3fff" : "#FFFFFF",
       tab: isDark ? "#363636ff" : "#FFFFFF",
     };

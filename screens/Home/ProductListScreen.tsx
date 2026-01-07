@@ -1,5 +1,5 @@
 import React from "react";
-import { Pressable, FlatList } from "react-native";
+import { FlatList } from "react-native";
 import { useQuery } from "@tanstack/react-query";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import type { HomeStackParamList } from "../../navigation/types";
@@ -41,6 +41,9 @@ export default function ProductListScreen({ navigation }: Props) {
             }
           />
         )}
+        contentContainerStyle={{
+          paddingBottom: 120,
+        }}
       />
     </ScreenLayout>
   );
