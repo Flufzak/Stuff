@@ -1,5 +1,5 @@
 import React from "react";
-import { FlatList } from "react-native";
+import { FlatList, View } from "react-native";
 import { useQuery } from "@tanstack/react-query";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import type { HomeStackParamList } from "../../navigation/types";
@@ -11,12 +11,13 @@ import ProductCard from "../../components/ProductCard";
 import AppButton from "../../components/ui/AppButton";
 import { addToCart } from "../../store/cartSlice";
 import { useAppDispatch } from "../../store/hooks";
+import EmptyState from "../../components/EmptyState";
 
 type Props = NativeStackScreenProps<HomeStackParamList, "ProductList">;
 
 export default function ProductListScreen({ navigation }: Props) {
   const dispatch = useAppDispatch();
-  const { data, isLoading, isError } = useQuery({
+  const { data, isLoading, isError, refetch } = useQuery({
     queryKey: ["products"],
     queryFn: fetchProducts,
   });
@@ -29,7 +30,19 @@ export default function ProductListScreen({ navigation }: Props) {
     );
   }
   if (isError) return <AppText>Error loading products</AppText>;
-  if (!data?.products?.length) return <AppText>No products found</AppText>;
+  if (!data?.products?.length) {
+    return (
+      <ScreenLayout>
+        <EmptyState title="No products found">
+          <AppText>Something went wrong while loading products.</AppText>
+
+          <View>
+            <AppButton title="Refresh" onPress={refetch} />
+          </View>
+        </EmptyState>
+      </ScreenLayout>
+    );
+  }
 
   return (
     <ScreenLayout>
