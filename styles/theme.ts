@@ -1,6 +1,7 @@
 import { palette } from "./palette";
 import type { RootState } from "../store/store";
 import { createSelector } from "@reduxjs/toolkit";
+import { red } from "react-native-reanimated/lib/typescript/Colors";
 
 export const selectColors = createSelector(
   [(state: RootState) => state.theme.mode],
@@ -16,6 +17,8 @@ export const selectColors = createSelector(
       border: isDark ? "#2A2A2A" : "#d6d5d5ff",
       card: isDark ? "#3f3f3fff" : "#FFFFFF",
       tab: isDark ? "#363636ff" : "#FFFFFF",
+      muted: isDark ? "#3f3f3fff" : "#535353ff",
+      red: isDark ? "#c05151ff" : "#a82525ff",
     };
   }
 );
