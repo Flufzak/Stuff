@@ -10,6 +10,8 @@ import ProductDetailCard from "../../components/ProductDetailCard";
 import AppButton from "../../components/ui/AppButton";
 import { useAppDispatch } from "../../store/hooks";
 import { addToCart } from "../../store/cartSlice";
+import { View } from "react-native";
+import FavoriteButton from "../../components/ui/FavoriteButton";
 
 type Props = NativeStackScreenProps<HomeStackParamList, "ProductDetail">;
 
@@ -49,6 +51,15 @@ export default function ProductDetailScreen({ route }: Props) {
         price={data.price}
         description={data.description}
       />
+      <View style={{ alignSelf: "flex-start", marginTop: 10, marginLeft: 10 }}>
+        <FavoriteButton
+          id={id}
+          title={data.title}
+          price={data.price}
+          thumbnail={data.thumbnail}
+          showLabel
+        />
+      </View>
 
       <AppButton
         title="Add to cart"
