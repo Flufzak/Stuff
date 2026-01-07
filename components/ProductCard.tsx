@@ -10,6 +10,7 @@ type Props = {
   price: number;
   thumbnail: string;
   onPress?: () => void;
+  action?: React.ReactNode;
 };
 
 export default function ProductCard({
@@ -17,6 +18,7 @@ export default function ProductCard({
   price,
   thumbnail,
   onPress,
+  action,
 }: Props) {
   const colors = useAppSelector(selectColors);
 
@@ -49,7 +51,9 @@ export default function ProductCard({
             {title}
           </AppText>
 
-          <AppText style={styles.price}>€{price}</AppText>
+          <AppText style={styles.price}>€ {price}</AppText>
+
+          {action ? <View style={styles.action}>{action}</View> : null}
         </View>
 
         <AppText style={styles.chevron}>›</AppText>

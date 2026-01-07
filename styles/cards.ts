@@ -60,6 +60,9 @@ export const makeProductCardStyles = (colors: {
       opacity: 0.75,
       marginTop: 4,
     },
+    action: {
+      marginTop: 8,
+    },
   });
 export const makeProductDetailCardStyles = (colors: {
   card: string;

@@ -8,10 +8,14 @@ import AppText from "../../components/ui/AppText";
 import ScreenLayout from "../../components/ui/ScreenLayout";
 import Loader from "../../components/ui/Loader";
 import ProductCard from "../../components/ProductCard";
+import AppButton from "../../components/ui/AppButton";
+import { addToCart } from "../../store/cartSlice";
+import { useAppDispatch } from "../../store/hooks";
 
 type Props = NativeStackScreenProps<HomeStackParamList, "ProductList">;
 
 export default function ProductListScreen({ navigation }: Props) {
+  const dispatch = useAppDispatch();
   const { data, isLoading, isError } = useQuery({
     queryKey: ["products"],
     queryFn: fetchProducts,
@@ -39,6 +43,21 @@ export default function ProductListScreen({ navigation }: Props) {
             thumbnail={item.thumbnail}
             onPress={() =>
               navigation.navigate("ProductDetail", { id: item.id })
+            }
+            action={
+              <AppButton
+                title="Add to cart"
+                onPress={() =>
+                  dispatch(
+                    addToCart({
+                      id: item.id,
+                      title: item.title,
+                      price: item.price,
+                      thumbnail: item.thumbnail,
+                    })
+                  )
+                }
+              />
             }
           />
         )}
