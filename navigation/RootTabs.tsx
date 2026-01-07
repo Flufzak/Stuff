@@ -4,8 +4,8 @@ import type { RootTabParamList } from "./types";
 
 import HomeStack from "./HomeStack";
 import CartScreen from "../screens/Cart/CartScreen";
-import ProfileScreen from "../screens/Profile/ProfileScreen";
 import CustomTabBar from "./CustomTabBar";
+import ProfileStack from "./ProfileStack";
 
 const Tab = createBottomTabNavigator<RootTabParamList>();
 
@@ -20,8 +20,16 @@ export default function RootTabs() {
         component={HomeStack}
         options={{ title: "Home", headerShown: false }}
       />
-      <Tab.Screen name="Cart" component={CartScreen} />
-      <Tab.Screen name="Profile" component={ProfileScreen} />
+      <Tab.Screen
+        name="Cart"
+        component={CartScreen}
+        options={{ title: "Cart" }}
+      />
+      <Tab.Screen
+        name="Profile"
+        component={ProfileStack}
+        options={{ title: "Profile", headerShown: false }}
+      />
     </Tab.Navigator>
   );
 }
