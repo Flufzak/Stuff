@@ -1,8 +1,8 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
-import Svg, { Path } from "react-native-svg";
-import { useAppSelector } from "../../store/hooks"; // pas pad aan indien nodig
-import { palette } from "../../styles/palette"; // pas pad aan indien nodig
+import Svg, { Path, Circle } from "react-native-svg";
+import { useAppSelector } from "../../store/hooks";
+import { palette } from "../../styles/palette";
 
 function LeftBlob({ color }: { color: string }) {
   return (
@@ -11,8 +11,17 @@ function LeftBlob({ color }: { color: string }) {
       viewBox="0 0 100 100"
       preserveAspectRatio="none"
     >
+      {/* Grote linker vorm met golvende binnenrand */}
       <Path
-        d="M0,0 C25,10 20,40 35,50 C55,65 40,90 0,100 Z"
+        d="
+          M0,0
+          L0,100
+          L28,100
+          C40,90 30,78 34,68
+          C38,55 52,48 40,36
+          C28,24 42,12 32,0
+          Z
+        "
         fill={color}
         opacity={0.9}
       />
@@ -27,8 +36,17 @@ function RightBlob({ color }: { color: string }) {
       viewBox="0 0 100 100"
       preserveAspectRatio="none"
     >
+      {/* Smalle rechter vorm met lichte golf */}
       <Path
-        d="M100,0 C78,12 92,48 68,62 C48,80 72,96 100,100 Z"
+        d="
+          M100,0
+          L100,100
+          L86,100
+          C82,88 90,74 88,62
+          C86,48 80,40 84,26
+          C87,16 82,8 86,0
+          Z
+        "
         fill={color}
         opacity={0.9}
       />
