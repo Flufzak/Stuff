@@ -1,7 +1,5 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
-import { useAppSelector } from "../store/hooks";
-import { selectColors } from "../styles/theme";
 import AppText from "./ui/AppText";
 
 type Props = {
@@ -10,8 +8,6 @@ type Props = {
 };
 
 export default function EmptyState({ children, title }: Props) {
-  const colors = useAppSelector(selectColors);
-
   return (
     <View style={styles.center}>
       <AppText style={styles.title}>{title}</AppText>
