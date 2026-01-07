@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { Pressable, View } from "react-native";
+import { Image, Pressable, View } from "react-native";
 import AppText from "./ui/AppText";
 import { useAppSelector } from "../store/hooks";
 import { selectColors } from "../styles/theme";
@@ -8,10 +8,16 @@ import { makeProductCardStyles } from "../styles/cards";
 type Props = {
   title: string;
   price: number;
+  thumbnail: string;
   onPress?: () => void;
 };
 
-export default function ProductCard({ title, price, onPress }: Props) {
+export default function ProductCard({
+  title,
+  price,
+  thumbnail,
+  onPress,
+}: Props) {
   const colors = useAppSelector(selectColors);
 
   const styles = useMemo(
@@ -30,6 +36,14 @@ export default function ProductCard({ title, price, onPress }: Props) {
       style={({ pressed }) => [styles.card, pressed && styles.pressed]}
     >
       <View style={styles.row}>
+        <View style={styles.imageWrapper}>
+          <Image
+            source={{ uri: thumbnail }}
+            style={styles.image}
+            resizeMode="cover"
+          />
+        </View>
+
         <View style={styles.textBlock}>
           <AppText style={styles.title} numberOfLines={1}>
             {title}

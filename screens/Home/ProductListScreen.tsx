@@ -36,6 +36,7 @@ export default function ProductListScreen({ navigation }: Props) {
           <ProductCard
             title={item.title}
             price={item.price}
+            thumbnail={item.thumbnail}
             onPress={() =>
               navigation.navigate("ProductDetail", { id: item.id })
             }

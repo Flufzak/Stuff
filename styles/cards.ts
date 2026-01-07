@@ -42,4 +42,16 @@ export const makeProductCardStyles = (colors: {
       color: colors.text,
       opacity: 0.35,
     },
+    imageWrapper: {
+      width: 72,
+      height: 72,
+      borderRadius: 12,
+      overflow: "hidden",
+      backgroundColor: colors.card,
+    },
+
+    image: {
+      width: "100%",
+      height: "100%",
+    },
   });
