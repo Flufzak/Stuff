@@ -54,4 +54,53 @@ export const makeProductCardStyles = (colors: {
       width: "100%",
       height: "100%",
     },
+    description: {
+      fontSize: 13,
+      color: colors.text,
+      opacity: 0.75,
+      marginTop: 4,
+    },
+  });
+export const makeProductDetailCardStyles = (colors: {
+  card: string;
+  text: string;
+  border: string;
+  background: string;
+}) =>
+  StyleSheet.create({
+    card: {
+      borderRadius: 18,
+      backgroundColor: colors.card,
+      borderWidth: 1,
+      borderColor: colors.border,
+      overflow: "hidden",
+    },
+    imageWrapper: {
+      width: "100%",
+      height: 250,
+      backgroundColor: colors.border,
+    },
+    image: {
+      width: "100%",
+      height: "100%",
+    },
+    body: {
+      padding: 14,
+      gap: 8,
+    },
+    title: {
+      fontSize: 18,
+      color: colors.text,
+    },
+    price: {
+      fontSize: 16,
+      color: colors.text,
+      opacity: 0.8,
+    },
+    description: {
+      fontSize: 14,
+      color: colors.text,
+      opacity: 0.75,
+      lineHeight: 20,
+    },
   });
