@@ -16,3 +16,5 @@ export const selectTotalItems = createSelector(
 export const selectSubtotal = createSelector([selectCartItemsArray], (items) =>
   items.reduce((sum, i) => sum + i.price * i.quantity, 0)
 );
+export const selectCartCount = (state: RootState) =>
+  Object.values(state.cart.items).reduce((sum, item) => sum + item.quantity, 0);

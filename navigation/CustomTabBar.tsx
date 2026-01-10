@@ -12,6 +12,8 @@ import Animated, {
 } from "react-native-reanimated";
 import { useAppSelector } from "../store/hooks";
 import { selectColors } from "../styles/theme";
+import AppText from "../components/ui/AppText";
+import { selectCartCount } from "../store/selectors";
 
 const BAR_HEIGHT = 56;
 const BUBBLE = 44;
@@ -24,6 +26,7 @@ const NOTCH_DEPTH = 42;
 const AnimatedPath = Animated.createAnimatedComponent(Path);
 
 export default function CustomTabBar({ state, navigation }: BottomTabBarProps) {
+  const cartCount = useAppSelector(selectCartCount);
   const colors = useAppSelector(selectColors);
   const insets = useSafeAreaInsets();
   const screenWidth = Dimensions.get("window").width;
@@ -129,6 +132,18 @@ export default function CustomTabBar({ state, navigation }: BottomTabBarProps) {
     return { d: topStroke };
   });
 
+  const renderBadge = () => {
+    if (cartCount <= 0) return null;
+
+    return (
+      <View style={[styles.badge, { backgroundColor: colors.secondary }]}>
+        <AppText style={styles.badgeText}>
+          {cartCount > 99 ? "99+" : cartCount}
+        </AppText>
+      </View>
+    );
+  };
+
   return (
     <View style={styles.wrapper} pointerEvents="box-none">
       {/* BAR MET UITGESNEDEN CURVE */}
@@ -185,14 +200,17 @@ export default function CustomTabBar({ state, navigation }: BottomTabBarProps) {
               >
                 {isFocused ? (
                   <View
-                    style={{
-                      width: ICON_SIZE,
-                      height: ICON_SIZE,
-                      opacity: 0,
-                    }}
+                    style={{ width: ICON_SIZE, height: ICON_SIZE, opacity: 0 }}
                   />
                 ) : (
-                  <Ionicons name={iconName} size={ICON_SIZE} color="#9AA0A6" />
+                  <View style={styles.iconWrap}>
+                    <Ionicons
+                      name={iconName}
+                      size={ICON_SIZE}
+                      color="#9AA0A6"
+                    />
+                    {route.name === "Cart" && renderBadge()}
+                  </View>
                 )}
               </Pressable>
             );
@@ -211,7 +229,10 @@ export default function CustomTabBar({ state, navigation }: BottomTabBarProps) {
           bubbleStyle,
         ]}
       >
-        <Ionicons name={activeIcon} size={ICON_SIZE} color={colors.primary} />
+        <View style={styles.bubbleIconWrap}>
+          <Ionicons name={activeIcon} size={ICON_SIZE} color={colors.primary} />
+          {activeRouteName === "Cart" && renderBadge()}
+        </View>
       </Animated.View>
 
       {/* ANDROID SAFE AREA */}
@@ -260,5 +281,37 @@ const styles = StyleSheet.create({
 
     //  Android
     elevation: 8,
+  },
+  iconWrap: {
+    position: "relative",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
+  bubbleIconWrap: {
+    position: "relative",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
+  badge: {
+    position: "absolute",
+    right: -10,
+    top: -10,
+    minWidth: 18,
+    height: 18,
+    borderRadius: 9,
+    paddingHorizontal: 5,
+    alignItems: "center",
+    justifyContent: "center",
+    borderWidth: 2,
+    borderColor: "white",
+  },
+
+  badgeText: {
+    color: "white",
+    fontSize: 11,
+    lineHeight: 11,
+    fontWeight: "700",
   },
 });
