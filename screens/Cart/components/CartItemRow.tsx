@@ -1,12 +1,13 @@
 import React from "react";
 import { View, StyleSheet, Pressable } from "react-native";
-import { useAppDispatch } from "../../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import {
   decrementQty,
   incrementQty,
   removeItem,
 } from "../../../store/cartSlice";
 import AppText from "../../../components/ui/AppText";
+import { selectColors } from "../../../styles/theme";
 
 type CartItem = {
   id: number;
@@ -15,21 +16,13 @@ type CartItem = {
   quantity: number;
 };
 
-type ThemeColors = {
-  background: string;
-  card: string;
-  text: string;
-  muted: string;
-  border: string;
-  red: string;
-};
-
 type Props = {
   item: CartItem;
-  colors: ThemeColors;
 };
 
-export default function CartItemCard({ item, colors }: Props) {
+export default function CartItemCard({ item }: Props) {
+  const colors = useAppSelector(selectColors);
+
   const dispatch = useAppDispatch();
 
   return (

@@ -1,7 +1,6 @@
 import { palette } from "./palette";
 import type { RootState } from "../store/store";
 import { createSelector } from "@reduxjs/toolkit";
-import { red } from "react-native-reanimated/lib/typescript/Colors";
 
 export const selectColors = createSelector(
   [(state: RootState) => state.theme.mode],

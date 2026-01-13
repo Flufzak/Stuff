@@ -1,30 +1,17 @@
 import React from "react";
 import { View, StyleSheet, Pressable } from "react-native";
 import AppText from "../../../components/ui/AppText";
-import { useAppDispatch } from "../../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { clearCart } from "../../../store/cartSlice";
-
-type ThemeColors = {
-  card: string;
-  border: string;
-  text: string;
-  red: string;
-  background: string;
-  primary: string;
-  secondary: string;
-};
+import { selectColors } from "../../../styles/theme";
 
 type Props = {
   totalItems: number;
   subtotal: number;
-  colors: ThemeColors;
 };
 
-export default function CartSummaryCard({
-  totalItems,
-  subtotal,
-  colors,
-}: Props) {
+export default function CartSummaryCard({ totalItems, subtotal }: Props) {
+  const colors = useAppSelector(selectColors);
   const dispatch = useAppDispatch();
   return (
     <View

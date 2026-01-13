@@ -66,17 +66,11 @@ export default function CartScreen({
           contentContainerStyle={styles.listContent}
           data={items}
           keyExtractor={(i) => String(i.id)}
-          renderItem={({ item }) => (
-            <CartItemCard item={item} colors={colors} />
-          )}
+          renderItem={({ item }) => <CartItemCard item={item} />}
         />
 
         <View style={{ paddingBottom: tabBarHeight }}>
-          <CartSummaryCard
-            subtotal={subtotal}
-            totalItems={totalItems}
-            colors={colors}
-          />
+          <CartSummaryCard subtotal={subtotal} totalItems={totalItems} />
         </View>
       </View>
     </ScreenLayout>
